@@ -13,26 +13,20 @@ server.listen(port, () => {
 
 app.use(express.static(path.join(__dirname, "public")));
 
+fs.stat(__dirname + "/pastes/", (err) => {
+  if (err)
+    fs.mkdir(__dirname + "/pastes", (err) => {
+      if (err) throw err;
+      console.log(chalk.yellow("pastes directory didn't exist. Created one"));
+    });
+});
+
 io.on("connection", (socket) => {
   console.log(chalk.blue("someone connected"));
 
-  socket.on("client send new paste", (data) => {
-    createPaste(data);
-    //  var fileContext = data;
-    //  if (fileContext.length > 10000) {
-    //    socket.emit("server reject file: over 10k chars");
-    //    console.log(chalk.red("File was rejected: Over 10k chars"));
-    //  } else {
-    //    fs.writeFile(
-    //      __dirname + "/pastes/" + generateRandomString(8) + ".txt",
-    //      fileContext,
-    //      (err) => {
-    //        if (err) throw err;
-    //        console.log(chalk.green("Paste was successfully created"));
-    //      }
-    //    );
-    //  }
-  });
+  socket.on("client send new paste", (data) => createPaste(data));
+
+  socket.on("client request paste", (data) => requestPaste(data));
 
   const createPaste = (data) => {
     var fileContext = data;
@@ -49,6 +43,22 @@ io.on("connection", (socket) => {
         }
       );
     }
+  };
+
+  const requestPaste = (data) => {
+    var fileName = data;
+    fs.readFile(
+      __dirname + "/pastes/" + fileName + ".txt",
+      "UTF-8",
+      (err, data) => {
+        if (err) {
+          console.log(chalk.red(`Error: Unable to get paste ${fileName}.txt`));
+          socket.emit("server reject request: Unable to get paste");
+        } else {
+          socket.emit("server send paste data", data);
+        }
+      }
+    );
   };
 
   var generateRandomString = (length) => {
