@@ -9,6 +9,9 @@
   height: 80vh;
   width: 100vh;
   margin: auto;
+  background-color: #e2e2e2;
+  border: none;
+  border-radius: 5px;
 }
 
 .pasteArea {
@@ -22,6 +25,8 @@
   width: 20vh;
   margin: auto;
   margin-top: 5vh;
+  border: none;
+  border-radius: 5px;
 }
 
 header {
@@ -30,6 +35,15 @@ header {
 }
 
 .footer {
+  color: #fef9ef;
   text-align: center;
   margin: 2vh;
+}
+
+body {
+  background-color: #227c9d;
+}
+
+button {
+  background-color: #17c3b2;
 }
