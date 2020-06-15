@@ -5,7 +5,6 @@ var path = require("path");
 var server = require("http").createServer(app);
 var io = require("socket.io").listen(server);
 var chalk = require("chalk");
-const getSize = require("get-folder-size");
 const getFolderSize = require("get-folder-size");
 var port = process.env.PORT || 3000;
 
