@@ -15,16 +15,16 @@ app.use(express.static(path.join(__dirname, "public")));
 io.on("connection", (socket) => {
   console.log("someone connected");
 
-  socket.on("client send paste", (data) => {
+  socket.on("client send new paste", (data) => {
+    console.log(data);
+  });
+
+  socket.on("client request paste", (data) => {
     fs.readFile(data, "UTF-8", (err, data) => {
       if (err) throw err;
 
       var content = data;
-      readPaste(content);
+      console.log(context);
     });
   });
-
-  const readPaste = (file) => {
-    console.log(file);
-  };
 });
