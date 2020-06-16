@@ -87,12 +87,10 @@ io.on("connection", (socket) => {
       }, 100);
       fs.readdir(__dirname + "/pastes", (err, files) => {
         folderStats["numPastes"] = files.length;
-        console.log(files.length);
       });
       getFolderSize(__dirname + "/pastes", (err, size) => {
         if (err) console.log(chalk.red("Unable to get directory size"));
         folderStats["size"] = size;
-        console.log(size);
       });
     });
   };
