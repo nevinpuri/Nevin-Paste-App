@@ -2,7 +2,7 @@
 
 ## https://nevin-paste-app.herokuapp.com/
 
-A website which people can paste things into to share with their friends. This website currently tracks the total amount of pastes made, as well as the size they take up.
+A website which people can paste things into to share with their friends. This website currently tracks the total amount of pastes made, as well as the size they take up. One thing to note, is that, since this is hosted on a free dyno on herokuapp, the pastes all get deleted after the website goes to sleep. However, this isn't the case if you decide to self host it.
 
 ![1](/images/1.png)
 
